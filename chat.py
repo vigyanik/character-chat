@@ -5,7 +5,7 @@ import pprint
 
 URL = "http://0.0.0.0:8000/v1/chat/completions"
 
-MODEL = "stable-vicuna-13B.ggmlv3.q8_0"
+MODEL = "Vicuna-13B-Uncensored.ggmlv3.q2_K"
 
 characters = [
   {"name": "News Article Summarizer", "temperature": 0.7, "top_k": 40, "repitition_penalty": 1.2, "prompt": "Analyze the provided news article and generate a summary that includes the headline, key points, significant quotes, and conclusions. Ensure the summary is concise, comprehensive, and maintains the context and tone of the original piece."},
