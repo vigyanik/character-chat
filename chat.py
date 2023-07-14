@@ -66,7 +66,7 @@ def reset_messages():
   st.markdown(dict_to_markdown_table(character_name_to_params[st.session_state.character_name]))
 
 # Render the app.
-st.title('Chat App')
+st.title('Character Chat')
 # Show the list of characters.
 st.sidebar.header('Characters')
 character_name = st.sidebar.selectbox('Character', character_list, key="character_name", on_change = reset_messages)
