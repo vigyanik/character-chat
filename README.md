@@ -48,7 +48,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
 
 ## Download the model
 
-We recommend one of the models from [TheBloke's huggingface vicuna repository](https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-GGML/tree/main).
+We recommend one of the models from [TheBloke's huggingface vicuna repository](https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-GGML/tree/main). We recommend "Wizard-Vicuna-13B-Uncensored.ggmlv3.q2_K.bin" to get started. If you choose a different file, please update chat.py to use that model's name (everything before the ".bin")
 
 1. Select the model you want to use and download the corresponding `.bin` file by clicking on the 'Download' button.
 2. Save the model file in a location of your choice.
