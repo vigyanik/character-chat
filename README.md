@@ -48,7 +48,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
 
 ## Download the model
 
-We recommend one of the models from [here](https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-GGML).
+We recommend one of the models from [TheBloke's huggingface vicuna repository](https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-GGML/tree/main).
 
 1. Select the model you want to use and download the corresponding `.bin` file by clicking on the 'Download' button.
 2. Save the model file in a location of your choice.
