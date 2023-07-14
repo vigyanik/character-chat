@@ -6,7 +6,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
 ![Character Chat](character-chat.png)
 ## Installation
 
-1. **Conda environment**: This project uses a conda environment for managing dependencies. If you do not have Conda installed, follow the instructions [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/). 
+1. **Conda environment**: This project uses a conda environment for managing dependencies. If you do not have Conda installed, follow the instructions [on the conda website](https://docs.conda.io/projects/conda/en/latest/user-guide/install/). 
 
     Create a new conda environment named `character-chat` using the following command:
 
@@ -44,7 +44,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     pip install llama-cpp-python
     ```
 
-    The source code and additional installation information can be found [here](https://github.com/abetlen/llama-cpp-python).
+    The source code and additional installation information can be found [llama-cpp-python github](https://github.com/abetlen/llama-cpp-python).
 
 ## Download the model
 
