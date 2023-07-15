@@ -1,6 +1,6 @@
 # Character Chat
 
-Character-Chat is a project that aims to provide a dynamic platform to interact with large language models in the character of your choice. 
+Character-Chat is a project that aims to provide a platform to interact with large language models in the character of your choice. 
 The goal of the project is to help understand the purpose and impact parameters of large language models, such as temperature, top_k, top_k, repeat_penalty etc.
 The system uses the Llama Python wrapper to enable efficient serving of large language models, and the Streamlit framework for building a highly interactive user interface.
 ![Character Chat](character-chat.png)
@@ -50,13 +50,13 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     If you have a Intel or AMD CPU (no GPU), use the following
 
     ```
-    python3 launch_chat.pyt --model <model_path> --device cpu
+    python3 launch_chat.py --model <model_path> --device cpu
     ```
     
     If you have a Applce Silicon (M1/M2) Mac, use the following
 
     ```
-    python3 launch_chat.pyt --model <model_path> --device mps
+    python3 launch_chat.py --model <model_path> --device mps
     ```
 
     Replace `<model_path>` with the huggingface repo ID of the model.
