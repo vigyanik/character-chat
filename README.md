@@ -38,36 +38,33 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     pip install -r requirements.txt
     ```
 
-4. **Install llama-cpp-python**: The `llama-cpp-python` library is a Python wrapper around the Llama C++ library for serving large language models. Install it from PyPI (requires a C compiler):
+
+4. **Start the server**: In your terminal, execute the following command to start the server on port 8000:
+
+    If you have a GPU, use the following
 
     ```
-    pip install llama-cpp-python
+    python3 launch_chat.py --model <model_path> --device gpu
     ```
 
-    The source code and additional installation information can be found [here](https://github.com/abetlen/llama-cpp-python).
-
-## Download the model
-
-We recommend one of the models from [TheBloke's huggingface vicuna repository](https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-GGML/tree/main). We recommend "Wizard-Vicuna-13B-Uncensored.ggmlv3.q2_K.bin" to get started. If you choose a different file, please update chat.py to use that model's name (everything before the ".bin")
-
-1. Select the model you want to use and download the corresponding `.bin` file by clicking on the 'Download' button.
-2. Save the model file in a location of your choice.
-
-## Run the application
-
-1. **Start the server**: In your terminal, execute the following command to start the server on port 8000:
+    If you have a Intel or AMD CPU, use the following
 
     ```
-    python3 -m llama_cpp.server --model <path_to_model_bin_file>
+    python3 launch_chat.pyt --model <model_path> --device cpu
     ```
-
-    Replace `<path_to_model_file>` with the path of the downloaded model bin file.
-
-2. **Start the Streamlit app**: Open another terminal window and navigate to the directory containing `chat.py`. Execute the following command to start the Streamlit app:
+    
+    If you have a Applce Silicon (M1/M2) Mac, use the following
 
     ```
-    streamlit run ./chat.py
+    python3 launch_chat.pyt --model <model_path> --device mps
     ```
+
+    Replace `<model_path>` with the huggingface repo ID of the model.
+
+    We recommend one of the following:
+    * lmsys/vicuna-7b-v1.3
+    * lmsys/vicuna-13b-v1.3     
+
 
 Navigate to the URL provided in the console to interact with the application. Select a character from the list on the left and then start a conversation in the chat window. Feel free to tweak the parameters and observe their impact on the interaction.
 
