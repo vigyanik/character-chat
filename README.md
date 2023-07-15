@@ -6,7 +6,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
 ![Character Chat](character-chat.png)
 ## Installation
 
-1. **Conda environment**: This project uses a conda environment for managing dependencies. If you do not have Conda installed, follow the instructions [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/). 
+1. **Conda environment**: This project uses a conda environment for managing dependencies. If you do not have Conda installed, follow the instructions [on the conda website](https://docs.conda.io/projects/conda/en/latest/user-guide/install/). 
 
     Create a new conda environment named `character-chat` using the following command:
 
@@ -47,7 +47,7 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     python3 launch_chat.py --model <model_path> --device gpu
     ```
 
-    If you have a Intel or AMD CPU, use the following
+    If you have a Intel or AMD CPU (no GPU), use the following
 
     ```
     python3 launch_chat.pyt --model <model_path> --device cpu
