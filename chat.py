@@ -2,25 +2,15 @@ import streamlit as st
 import requests
 import json
 import pprint
+import sys
 
 URL = "http://0.0.0.0:8000/v1/chat/completions"
 
-MODEL = "Vicuna-13B-Uncensored.ggmlv3.q2_K"
+MODEL = sys.argv[1]
+print("loaded model", MODEL)
 
-characters = [
-  {"name": "News Article Summarizer", "temperature": 0.7, "top_k": 40, "repitition_penalty": 1.2, "prompt": "Analyze the provided news article and generate a summary that includes the headline, key points, significant quotes, and conclusions. Ensure the summary is concise, comprehensive, and maintains the context and tone of the original piece."},
-  {"name": "Interactive Storytelling Game", "temperature": 1.0, "top_p": 0.9, "repitition_penalty": 1.1, "prompt": "Continue the narrative from the last saved plot point. Consider the characters' personalities, past decisions, and the game's universe rules. Introduce engaging dialogues, conflicts, and plot twists to keep the player immersed. Maintain the consistency of the story world."},
-  {"name": "Customer Support Chatbot", "temperature": 0.5, "top_k": 20, "repitition_penalty": 2, "prompt": "Reply to the customer's inquiries accurately, using a courteous and professional tone. If you're asked about product specifications, provide detailed and relevant information. For troubleshooting issues, offer step-by-step solutions. Remember to empathize with the customer's situation and assure them of your assistance."},
-  {"name": "Creative Writing Assistant", "temperature": 1.2, "top_p": 0.95,"repitition_penalty": 1, "prompt": "Generate creative ideas and suggestions based on the current narrative, characters, and themes. Offer alternative plot developments, character interactions, or narrative devices. If the user is facing writer's block, provide prompts or scenarios to ignite their creativity. Always respect the original tone and style of the writing."},
-  {"name": "Coding Assistant", "temperature": 0.2, "top_k": 5, "repitition_penalty": 1.5, "prompt": "Provide relevant code suggestions to accomplish the user's goal. If errors are present, explain what they are and offer fixes. Suggest improvements or best practices to optimize the code. Ensure your advice is in line with the language's syntax rules and the user's coding style."},
-  {"name": "Language Learning Tool", "temperature": 0.6, "top_k": 30, "repitition_penalty": 1.2, "prompt": "Provide clear explanations of the given language concept, ensuring they are understandable for a beginner. Offer examples that demonstrate this concept in real language use. If it's a grammar rule, demonstrate it in a variety of sentences. Provide practice exercises and correct mistakes, offering explanations for your corrections."},
-  {"name": "Product Recommendation Engine", "temperature": 0.9, "top_p": 0.85, "repitition_penalty": 1.2, "prompt": "Analyze the user's past purchases, browsing history, and declared interests. Recommend products that align with these factors, providing a balance between new discoveries and their preferences. If the user has a wish list, consider the items in it. Explain why you recommend each product to make the suggestions more persuasive and personalized."},
-  {"name": "Medical Diagnosis Assistant", "temperature": 0.3, "top_k": 10, "repitition_penalty": 1.5, "prompt": "Consider the patient's reported symptoms, their medical history, and any risk factors they have. Provide a likely diagnosis and explain it in layman's terms. Suggest appropriate next steps, such as tests to confirm the diagnosis, potential treatment options, or lifestyle changes. Remind the patient to consult a healthcare professional for a final diagnosis and treatment."},
-  {"name": "Market Trend Prediction System", "temperature": 0.7, "top_p": 0.8, "repitition_penalty": 1.3, "prompt": "Examine the current market data, including price movements, trading volume, and news events. Identify patterns that suggest upcoming trends. Use reliable prediction models to forecast market behavior. Suggest potential investment opportunities but remind the user that all investments come with risks."},
-  {"name": "Legal Document Reviewer", "temperature": 0.4, "top_k": 15, "repitition_penalty": 1.2, "prompt": "Review the provided legal document, paying attention to terminology, clause structure, and legality. Identify potential issues, such as conflicts with other laws or regulations, ambiguous statements, or loopholes. Suggest revisions to resolve these issues. Provide a summary of the document's key points and its implications for the user."},
-
-
-]
+with open('characters.json') as f:
+  characters = json.load(f)
 
 
 
@@ -29,8 +19,8 @@ def prompt(messages, params):
     headers = {'Content-type': 'application/json'}
     pprint.pprint(data)
     response = requests.post(URL, data=json.dumps(data), headers=headers)
+    pprint.pprint(response.json())
     if response.status_code == 200:
-      pprint.pprint(response.json())
       return response.json()["choices"][0]["message"]
     else:
       return "Error:", response.status_code
@@ -74,12 +64,12 @@ st.sidebar.write('You selected:', character_name)
 
 parameters = {
  # "max_new_tokens": {"data_type": "int_range", "default": 2048, "min": 1, "max": 2048, "group": "all"},
-  "max_tokens": {"data_type": "int_range", "default": 2048, "min": 1, "max": 2048, "group": "all"},
+  "max_tokens": {"data_type": "int_range", "default": 1024, "min": 1, "max": 1024, "group": "all"},
  # "early_stopping": {"data_type": "option", "default": False, "options": {"False": False, "True": True, "never": "never"}, "group": "all"},
  # "num_beams": {"data_type": "int_range", "default": 1, "min": 1, "max": 5, "group": "all"},
  # "num_beam_groups": {"data_type": "int_range", "default": 1, "min": 1, "max": 5, "group": "all"},
   "temperature": {"data_type": "float_range", "default": 1.0, "min": 0.0, "max": 5.0, "group": "all"},
-  "top_k": {"data_type": "int_range", "default": 40, "min": 1, "max": 1000, "group": "all"},
+  "top_k": {"data_type": "int_range", "default": 40, "min": 1, "max": 100, "group": "all"},
   "top_p": {"data_type": "float_range", "default": 0.95, "min": 0.0, "max": 1.0, "group": "all"},
  # "typical_p": {"data_type": "float_range", "default": 1.0, "min": 0.0, "max": 1.0, "group": "all"},
  # "epsilon_cutoff": {"data_type": "float_range", "default": 0.0, "min": 0.0, "max": 1.0, "group": "all"},
