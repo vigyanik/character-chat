@@ -4,6 +4,7 @@ import signal
 import subprocess
 import sys
 import threading
+import time
 
 def print_output(process, prefix):
     for line in iter(process.stdout.readline, b''):
@@ -38,6 +39,9 @@ def launch_programs(args):
     
     api_server_proc = subprocess.Popen(api_server_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     threading.Thread(target=print_output, args=(api_server_proc, '[api_server]')).start()
+
+    # wait for the model to load, to launch
+    time.sleep(15)
 
     # Prepare the command for chat
     chat_cmd = ['streamlit', 'run', './chat.py']
