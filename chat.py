@@ -3,11 +3,24 @@ import requests
 import json
 import pprint
 import sys
+import openai
 
-URL = "http://0.0.0.0:8000/v1/chat/completions"
+import argparse
 
-MODEL = sys.argv[1]
-print("loaded model", MODEL)
+# Define the argument parser
+parser = argparse.ArgumentParser(description='Provide your host, port and model')
+
+# Define arguments
+parser.add_argument('--host', type=str, default='localhost', help='Host to use; default is localhost.')
+parser.add_argument('--port', type=int, default=5001, help='Port to use; default is 5001.')
+parser.add_argument('--model', type=str, required=True, help='Model to use; must be provided.')
+
+# Parse arguments
+args = parser.parse_args()
+
+openai.api_base = f"http://{args.host}:{args.port}/v1"
+openai.api_key = "sk-111111111111111111111111111111111111111111111111"
+MODEL = f"{args.model}"
 
 with open('characters.json') as f:
   characters = json.load(f)
@@ -111,6 +124,7 @@ if message := st.chat_input('Say something'):
     st.markdown(message)
   with st.chat_message("assistant"):
       message_placeholder = st.empty()
+      full_response = ""
       params = {}
       for param_name, param_value in parameters.items():
         if param_value["data_type"] == "int_range" or param_value["data_type"] == "float_range":
@@ -118,6 +132,14 @@ if message := st.chat_input('Say something'):
         elif param_value["data_type"] == "option":
           params[param_name] = param_value["options"][widget_value[param_name]]
       pprint.pprint(params)
-      full_message = prompt(st.session_state.messages, params)
-      message_placeholder.markdown(full_message["content"])
-  st.session_state.messages.append(full_message)
+      for response in openai.ChatCompletion.create(
+        model=MODEL,
+        messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
+        stream=True):
+        full_response += response.choices[0].delta.get("content", "")
+        message_placeholder.markdown(full_response + "▌")
+  st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+      #full_message = prompt(st.session_state.messages, params)
+      #message_placeholder.markdown(full_message["content"])
+  #st.session_state.messages.append(full_message)
