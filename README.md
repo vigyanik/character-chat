@@ -38,7 +38,6 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     pip install -r requirements.txt
     ```
 
-    ```
 4. **Install text-generation-webui**:
    text-generation-webui is tool that helps run almost all the available open source models. It also runs these models with an API that we can use in character-chat.
    See installation instructions at the [text-generation-webui page](https://github.com/oobabooga/text-generation-webui). Use either the one-click installation or manual installation using conda to install text-generation-webui.
