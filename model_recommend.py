@@ -6,7 +6,7 @@ def recommend_model(mem, device_type):
     model = ''
     instructions = ''
     mem = int(mem)
-    if device_type == 'gpu:
+    if device_type == 'gpu':
         if mem >= 34:
             model = 'TheBloke/guanaco-65B-GPTQ'
         elif mem >= 17:
@@ -17,7 +17,7 @@ def recommend_model(mem, device_type):
             model = 'TheBloke/guanaco-7B-GPTQ'
         else:
             model = ''
-        instructions = f"In the text-generation-webui folder, run\npython download-model.py {model}"
+        instructions = f"In the text-generation-webui folder, run\n  python download-model.py {model}"
     else:
         if mem >= 47:
             model = 'https://huggingface.co/TheBloke/guanaco-65B-GGML/resolve/main/guanaco-65B.ggmlv3.q5_K_M.bin'
@@ -53,7 +53,7 @@ def recommend_model(mem, device_type):
             model = 'https://huggingface.co/TheBloke/guanaco-7B-GGML/resolve/main/guanaco-7B.ggmlv3.q3_K_S.bin'
         else:
             model = ''
-        instructions = f"In the text-generation-webui folder, download the following to the "models" folder\n{model}"
+        instructions = f"In the text-generation-webui folder, download the following to the 'models' folder\n  {model}"
     return model, instructions
 
 def system_info():
@@ -78,8 +78,6 @@ def system_info():
         total_mem = sum(mem_total) * 0.9 / 1024  # Convert from MB to GB
         avail_mem = sum(avail_mem) * 0.9 / 1024  # Convert from MB to GB
 
-        total_model_name, total_inst = recommend_model(total_mem)
-        avail_model_name, avail_inst = recommend_model(avail_mem)
     else:
         mem_info = psutil.virtual_memory()
         total_mem = mem_info.total / (1024 ** 3)  # Convert from bytes to GB
@@ -87,8 +85,8 @@ def system_info():
 
         device_type = 'mps' if 'Apple' in cpuinfo.get_cpu_info().get('brand_raw') else 'cpu'
 
-    total_model_name, total_inst = recommend_model(total_mem)
-    avail_model_name, avail_inst = recommend_model(avail_mem)
+    total_model_name, total_inst = recommend_model(total_mem, device_type)
+    avail_model_name, avail_inst = recommend_model(avail_mem, device_type)
 
     return device_type, total_mem, avail_mem, total_model_name, total_inst, avail_model_name, avail_inst, gpus
 
@@ -96,8 +94,8 @@ if __name__ == '__main__':
     device_type, total_mem, avail_mem, total_model_name, total_inst, avail_model_name, avail_inst, gpus = system_info()
     print("Detected device: ", device_type)
     print(f"Detected total memory: {total_mem}; Detected available memory: {avail_mem}")
-    print(f"Recommended model for total memory: {total_model_name})
+    print(f"Recommended model for total memory: {total_model_name}")
     print(f"  {total_inst}")
-    print(f"Recommended model for available memory: {avail_model_name})
+    print(f"Recommended model for available memory: {avail_model_name}")
     print(f"  {avail_inst}")
     print("GPU IDs: ", gpus)
