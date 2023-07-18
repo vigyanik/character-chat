@@ -38,35 +38,24 @@ The system uses the Llama Python wrapper to enable efficient serving of large la
     pip install -r requirements.txt
     ```
 
-
-4. **Start the server**: In your terminal, execute the following command to start the server on port 8000:
-
-    If you have a GPU, use the following
-
     ```
-    python3 launch_chat.py --model <model_path> --device gpu
+4. **Install text-generation-webui**:
+   text-generation-webui is tool that helps run almost all the available open source models. It also runs these models with an API that we can use in character-chat.
+   See installation instructions at the [text-generation-webui page](https://github.com/oobabooga/text-generation-webui). Use either the one-click installation or manual installation using conda to install text-generation-webui.
+   If you use the one-click installation, we recommend using the `base` conda environment and not the `character-chat` environment created above.
+   If you choose manual installation, we recommend creating a new conda environment and not the `character-chat` environment created above.
+5. **(Optional) Run the model-deployer**: To add the best model to text-generation-webui, based on your system and environment, you can run the following script
+   ```
+   python3 ./model-deployer.py
+   ```
+   It will output summary statistics about your environment, and ask you to select the preferred model, and then install it into text-generation-webui
+7. **Start the character-chat server**: In the character-chat conda environment, and in the character-chat directory your terminal, execute the following command to start the chat server:
     ```
-
-    If you have a Intel or AMD CPU (no GPU), use the following
-
+    streamlit run ./chat.py
     ```
-    python3 launch_chat.py --model <model_path> --device cpu
-    ```
-    
-    If you have a Applce Silicon (M1/M2) Mac, use the following
-
-    ```
-    python3 launch_chat.py --model <model_path> --device mps
-    ```
-
-    Replace `<model_path>` with the huggingface repo ID of the model.
-
-    We recommend one of the following:
-    * lmsys/vicuna-7b-v1.3
-    * lmsys/vicuna-13b-v1.3     
-
-
-Navigate to the URL provided in the console to interact with the application. Select a character from the list on the left and then start a conversation in the chat window. Feel free to tweak the parameters and observe their impact on the interaction.
+Navigate to the URL provided in the console to interact with the application. 
+If everything looks good, you should see a status message "Connected to model API!"
+Select a character from the list on the left and then start a conversation in the chat window. Feel free to tweak the parameters and observe their impact on the interaction.
 
 ## License
 
