@@ -6,53 +6,40 @@ def recommend_model(mem, device_type):
     model = ''
     instructions = ''
     mem = int(mem)
-    if device_type == 'gpu':
-        if mem >= 34:
-            model = 'TheBloke/guanaco-65B-GPTQ'
-        elif mem >= 17:
-            model = 'TheBloke/guanaco-33B-GPTQ'
-        elif mem >= 8:
-            model = 'TheBloke/guanaco-13B-GPTQ'
-        elif mem >= 4:
-            model = 'TheBloke/guanaco-7B-GPTQ'
-        else:
-            model = ''
-        instructions = f"In the text-generation-webui folder, run\n  python download-model.py {model}"
+    if mem >= 47:
+        model = 'https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGML/resolve/main/llama-2-70b-chat.ggmlv3.q5_K_M.bin'
+    elif mem >= 40:
+        model = 'https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGML/resolve/main/llama-2-70b-chat.ggmlv3.q4_K_M.bin'
+    elif mem >= 27:
+        model = 'https://huggingface.co/TheBloke/Llama-2-70B-Chat-GGML/resolve/main/llama-2-70b-chat.ggmlv3.q2_K.bin'
+    elif mem >= 23:
+        model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q5_K_S.bin'
+    elif mem >= 18:
+        model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q3_K_L.bin'
+    elif mem >= 16:
+        model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q3_K_M.bin'
+    elif mem >= 14:
+        model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q2_K.bin'
+    elif mem >= 11:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q6_K.bin'
+    elif mem >= 10:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q5_1.bin'
+    elif mem >= 9:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q5_0.bin'
+    elif mem >= 8:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q4_K_M.bin'
+    elif mem >= 7:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q3_K_L.bin'
+    elif mem >= 6:
+        model = 'https://huggingface.co/TheBloke/Llama-2-13B-chat-GGML/resolve/main/llama-2-13b-chat.ggmlv3.q3_K_S.bin'
+    elif mem >= 5:
+        model = 'https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q5_K_M.bin'
+    elif mem >= 4:
+        model = 'https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q4_K_S.bin'
+    elif mem >= 3:
+        model = 'https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/resolve/main/llama-2-7b-chat.ggmlv3.q3_K_S.bin'
     else:
-        if mem >= 47:
-            model = 'https://huggingface.co/TheBloke/guanaco-65B-GGML/resolve/main/guanaco-65B.ggmlv3.q5_K_M.bin'
-        elif mem >= 40:
-            model = 'https://huggingface.co/TheBloke/guanaco-65B-GGML/resolve/main/guanaco-65B.ggmlv3.q4_K_M.bin'
-        elif mem >= 27:
-            model = 'https://huggingface.co/TheBloke/guanaco-65B-GGML/resolve/main/guanaco-65B.ggmlv3.q2_K.bin'
-        elif mem >= 23:
-            model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q5_K_S.bin'
-        elif mem >= 18:
-            model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q3_K_L.bin'
-        elif mem >= 16:
-            model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q3_K_M.bin'
-        elif mem >= 14:
-            model = 'https://huggingface.co/TheBloke/guanaco-33B-GGML/resolve/main/guanaco-33B.ggmlv3.q2_K.bin'
-        elif mem >= 11:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q6_K.bin'
-        elif mem >= 10:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q5_1.bin'
-        elif mem >= 9:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q5_0.bin'
-        elif mem >= 8:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q4_K_M.bin'
-        elif mem >= 7:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q3_K_L.bin'
-        elif mem >= 6:
-            model = 'https://huggingface.co/TheBloke/guanaco-13B-GGML/resolve/main/guanaco-13B.ggmlv3.q3_K_S.bin'
-        elif mem >= 5:
-            model = 'https://huggingface.co/TheBloke/guanaco-7B-GGML/resolve/main/guanaco-7B.ggmlv3.q5_K_M.bin'
-        elif mem >= 4:
-            model = 'https://huggingface.co/TheBloke/guanaco-7B-GGML/resolve/main/guanaco-7B.ggmlv3.q4_K_S.bin'
-        elif mem >= 3:
-            model = 'https://huggingface.co/TheBloke/guanaco-7B-GGML/resolve/main/guanaco-7B.ggmlv3.q3_K_S.bin'
-        else:
-            model = ''
+        model = '<NOT_ENOUGH_MEMORY>'
         instructions = f"In the text-generation-webui folder, download the following to the 'models' folder\n  {model}"
     return model, instructions
 
@@ -98,4 +85,4 @@ if __name__ == '__main__':
     print(f"  {total_inst}")
     print(f"Recommended model for available memory: {avail_model_name}")
     print(f"  {avail_inst}")
-    print("GPU IDs: ", gpus)
+    # print("GPU IDs: ", gpus)
